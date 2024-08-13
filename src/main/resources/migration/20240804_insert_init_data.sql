@@ -1,28 +1,5 @@
 USE ktb_samsam;
 
-INSERT INTO ticket
-(
-    ticket_id,
-    user_id,
-    title,
-    contents,
-    place,
-    price,
-    start_date,
-    end_date,
-)
-VALUES
-    (
-        'TICKET-69DC4A0B-4F01-4D9F-BA65-1DC9FCA814B1',
-        'test',
-        '테스트 제목',
-        '테스트 내용',
-        '테스트 장소',
-        9000000,
-        '2024-08-03',
-        '2024-08-13'
-    );
-
 INSERT INTO user
 (
     user_id,
@@ -39,6 +16,32 @@ VALUES
         '010-0000-0000',
         'MASTER'
     );
+
+INSERT INTO ticket
+(
+    ticket_id,
+    user_id,
+    title,
+    contents,
+    place,
+    price,
+    start_date,
+    end_date
+)
+VALUES
+    (
+        'TICKET-69DC4A0B-4F01-4D9F-BA65-1DC9FCA814B1',
+        'test',
+        '테스트 제목',
+        '테스트 내용',
+        '테스트 장소',
+        9000000,
+        '2024-08-03',
+        '2024-08-13'
+    );
+
+
+
 INSERT INTO cart
 (
     cart_id,
