@@ -30,7 +30,7 @@ import static com.samsam.travel.travelcommerce.global.status.ErrorCode.BAD_REQUE
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/tickets")
+@RequestMapping("api/tickets")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -43,7 +43,7 @@ public class TicketController {
      */
     @GetMapping("/view/all")
     public ResponseEntity<ApiResponse<List<TicketSearchResponseDto>>> searchAllTicket(@ModelAttribute SearchDto searchDto) {
-        if(searchDto.isValidate()) {
+        if (searchDto.isValidate()) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
 
@@ -57,7 +57,7 @@ public class TicketController {
      * @return 상품 상세 조회 성공 여부, 문구와 상품 데이터
      */
     @GetMapping("/view/detail")
-    public ResponseEntity<ApiResponse<TicketResponseDto>> searchTicketDetail(@RequestParam String ticketId) {
+    public ResponseEntity<ApiResponse<TicketResponseDto>> searchTicketDetail(@RequestParam("ticketId") String ticketId) {
         if(StringUtils.isBlank(ticketId)) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
@@ -69,12 +69,12 @@ public class TicketController {
      * 상품 등록 API
      *
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
-     * @param ticketDto 상품에 대한 정보
+     * @param ticketDto   상품에 대한 정보
      * @return 상품 등록 성공 여부, 문구와 상품 데이터
      */
     @PostMapping("/regist")
-    public ResponseEntity<ApiResponse<TicketResponseDto>> addTicket(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TicketDto ticketDto) {
-        if(ticketDto.isValidate()) {
+    public ResponseEntity<ApiResponse<TicketResponseDto>> addTicket(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute TicketDto ticketDto) {
+        if (ticketDto.isValidate()) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
 
@@ -87,12 +87,12 @@ public class TicketController {
      * 상품 수정 API
      *
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
-     * @param ticketDto 상품에 대한 정보
+     * @param ticketDto   상품에 대한 정보
      * @return 상품 수정 성공 여부, 문구와 상품 데이터
      */
     @PutMapping("/modify")
-    public ResponseEntity<ApiResponse<Boolean>> updateTicket(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TicketDto ticketDto) {
-        if(ticketDto.isValidate()) {
+    public ResponseEntity<ApiResponse<Boolean>> updateTicket(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute TicketDto ticketDto) {
+        if (ticketDto.isValidate()) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
 
@@ -105,12 +105,12 @@ public class TicketController {
      * 상품 삭제 API
      *
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
-     * @param ticketId 상품 pk 값을 담는 변수
+     * @param ticketId    상품 pk 값을 담는 변수
      * @return 상품 삭제 성공 여부, 문구와 상품 데이터
      */
     @DeleteMapping("/remove")
     public ResponseEntity<ApiResponse<Boolean>> removeTicket(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String ticketId) {
-        if(StringUtils.isBlank(ticketId)) {
+        if (StringUtils.isBlank(ticketId)) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
 
@@ -126,11 +126,11 @@ public class TicketController {
      * Respose
      *
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
-     * @param ticketDto 상품에 대한 정보
+     * @param ticketDto   상품에 대한 정보
      * @return 상품 수정 여부, 문구와 상품 데이터
      */
     public TicketDto setUser(UserDetails userDetails, TicketDto ticketDto) {
-        ticketDto.setUser(getUserEntity(userDetails));
+        ticketDto.setUser(getUser(userDetails));
         return ticketDto;
     }
 
@@ -140,8 +140,8 @@ public class TicketController {
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
      * @return User 정보를 담은 user Entity 반환
      */
-    public User getUserEntity(UserDetails userDetails) {
-        return  User
+    public User getUser(UserDetails userDetails) {
+        return User
                 .builder()
                 .userId(userDetails.getUsername())
                 .password(userDetails.getPassword())

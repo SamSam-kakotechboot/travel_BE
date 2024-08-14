@@ -36,13 +36,14 @@ public class OrderController {
      * @param orderRequest 생성할 주문의 세부 정보.
      * @return 성공 상태와 메시지를 포함하는 API 응답을 포함하는 응답 엔티티.
      */
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<ApiResponse> createOrder(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated OrderRequest orderRequest) {
+        System.out.println("hello");
         orderService.createOrder(userDetails.getUsername(), orderRequest);
         return ResponseUtil.createApiResponse(SUCCESS_ORDER_CREATE, SUCCESS_ORDER_CREATE.getMessage());
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<ApiResponse<List<OrderListResponse>>> getAllOrders(@AuthenticationPrincipal UserDetails userDetails) {
         List<OrderListResponse> allOrders = orderService.getAllOrders(userDetails.getUsername());
         return ResponseUtil.createApiResponse(SUCCESS_ALL_ORDER_LIST, allOrders);

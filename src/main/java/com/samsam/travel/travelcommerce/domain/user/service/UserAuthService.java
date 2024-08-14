@@ -83,12 +83,11 @@ public class UserAuthService {
      * @throws AuthenticationException If the authentication fails.
      */
     public LoginResponse login(LoginRequest dto) throws AuthenticationException {
-        // 사용자가 존재하는지 확인
-        Optional<User> userOptional = userRepository.findById(dto.getId());
-        if (userOptional.isEmpty()) {
-            throw new UserNotFoundException(NOT_EXIST_USER);
-        }
+        // 사용자가 존재하는지 확인하고, 존재하면 User 객체를 가져옵니다.
+        User user = userRepository.findById(dto.getId())
+                .orElseThrow(() -> new UserNotFoundException(NOT_EXIST_USER));
 
+        // CustomPasswordAuthenticationToken을 사용해 인증 시도
         CustomPasswordAuthenticationToken token = new CustomPasswordAuthenticationToken(
                 dto.getId(), dto.getPassword()
         );
@@ -102,7 +101,13 @@ public class UserAuthService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwtToken = createToken((CustomPasswordAuthenticationToken) authentication);
-            return new LoginResponse(jwtToken, role);
+
+            // 로그인 응답에 사용자의 이름을 포함하여 반환
+            return LoginResponse.builder()
+                    .token(jwtToken)
+                    .role(role)
+                    .name(user.getName()) // User 객체에서 이름을 가져와서 설정
+                    .build();
         } catch (BadCredentialsException ex) {
             throw new UserLoginException(USER_PASSWORD_NOT_MATCHED);
         }

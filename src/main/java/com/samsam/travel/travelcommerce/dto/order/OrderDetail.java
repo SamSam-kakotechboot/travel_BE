@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 주문 상세 dto
  */
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class OrderDetail {
     @NotNull(message = "productId is mandatory")
