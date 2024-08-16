@@ -21,4 +21,5 @@ public class OrderListResponse {
     int quantity;
     OrderStatus status;
     String ticketId;
+    String ticketTitle;
 }

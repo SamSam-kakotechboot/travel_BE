@@ -9,6 +9,7 @@ import com.samsam.travel.travelcommerce.dto.order.OrderRequest;
 import com.samsam.travel.travelcommerce.entity.Orders;
 import com.samsam.travel.travelcommerce.entity.Ticket;
 import com.samsam.travel.travelcommerce.entity.User;
+import com.samsam.travel.travelcommerce.entity.model.OrderStatus;
 import com.samsam.travel.travelcommerce.entity.model.Role;
 import com.samsam.travel.travelcommerce.global.error.exception.ResourceNotFoundException;
 import com.samsam.travel.travelcommerce.global.error.exception.TicketNotFoundException;
@@ -30,9 +31,9 @@ import static com.samsam.travel.travelcommerce.global.status.ErrorCode.*;
 
 /**
  * 주문 관련 작업을 담당하는 서비스 클래스입니다.
- *
- *  * @author lavin
- *  * @since 1.0
+ * <p>
+ * * @author lavin
+ * * @since 1.0
  */
 @Service
 @RequiredArgsConstructor
@@ -47,7 +48,7 @@ public class OrderService {
     /**
      * 사용자 ID와 주문 요청 DTO를 받아서 새로운 주문을 생성합니다.
      *
-     * @param userId 사용자 ID
+     * @param userId       사용자 ID
      * @param orderRequest 주문 요청 DTO
      */
     @Transactional
@@ -63,10 +64,21 @@ public class OrderService {
     }
 
     public List<OrderListResponse> getAllOrders(String userId) {
-
         return orderRepository.findOrdersByUserId(userId)
                 .stream()
-                .map(Orders::toOrderListResponse)
+                .map(order -> {
+                    // order 엔티티에서 OrderListResponse를 생성할 때 ticketTitle을 포함시킵니다.
+                    return OrderListResponse.builder()
+                            .orderId(order.getOrderId())
+                            .userId(order.getUser().getUserId())
+                            .ticketId(order.getTicket().getTicketId())
+                            .ticketTitle(order.getTicketTitle())  // 티켓 제목 추가
+                            .orderDate(order.getOrderDate())
+                            .totalAmount(order.getTotalAmount())
+                            .quantity(order.getQuantity())
+                            .status(order.getStatus())
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 
@@ -74,7 +86,7 @@ public class OrderService {
      * 지정된 주문 ID와 사용자 ID를 기반으로 주문을 취소합니다.
      *
      * @param orderId 취소할 주문의 고유 ID
-     * @param userId 취소할 주문을 요청한 사용자의 ID
+     * @param userId  취소할 주문을 요청한 사용자의 ID
      * @throws ResourceNotFoundException 존재하지 않는 주문 ID로 취소하려고 할 때
      * @throws UserUnauthorizedException 사용자가 취소할 권한이 없을 때
      */
@@ -141,8 +153,8 @@ public class OrderService {
     /**
      * 사용자, 상품 맵, 주문 상세 정보로부터 주문 객체를 생성합니다.
      *
-     * @param user 사용자
-     * @param ticketsMap 상품 맵
+     * @param user        사용자
+     * @param ticketsMap  상품 맵
      * @param orderDetail 주문 상세 정보
      * @return 생성된 주문 객체
      * @throws TicketNotFoundException 상품을 찾을 수 없는 경우
@@ -157,10 +169,11 @@ public class OrderService {
                 .orderId(common.getTargetUuid("order"))
                 .user(user)
                 .ticket(ticket)
+                .ticketTitle(ticket.getTitle())  // 티켓의 제목을 설정
                 .orderDate(LocalDateTime.now())
                 .totalAmount(totalAmount)
                 .quantity(orderDetail.getQuantity())
-                .status(P)
+                .status(OrderStatus.P)
                 .build();
     }
 
@@ -171,7 +184,7 @@ public class OrderService {
      * @throws UserUnauthorizedException 사용자가 관리자가 아닌 경우 발생합니다.
      */
     private void validateMasterRole(String adminId) {
-        if(!userRepository.findRoleByUserId(adminId).equals(Role.MASTER)){
+        if (!userRepository.findRoleByUserId(adminId).equals(Role.MASTER)) {
             throw new UserUnauthorizedException(USER_NOT_MASTER);
         }
     }

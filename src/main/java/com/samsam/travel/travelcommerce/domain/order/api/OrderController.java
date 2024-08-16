@@ -38,7 +38,6 @@ public class OrderController {
      */
     @PostMapping
     public ResponseEntity<ApiResponse> createOrder(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated OrderRequest orderRequest) {
-        System.out.println("hello");
         orderService.createOrder(userDetails.getUsername(), orderRequest);
         return ResponseUtil.createApiResponse(SUCCESS_ORDER_CREATE, SUCCESS_ORDER_CREATE.getMessage());
     }
