@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS orders (
     total_amount    INT                             NOT NULL                                COMMENT '주문 가격',
     quantity        INT                             NOT NULL                                COMMENT '주문 수량',
     status          VARCHAR(1)                      NOT NULL    DEFAULT 'P'                 COMMENT '주문 상태(P : 대기, C : 주문완료)',
+    ticket_title    VARCHAR(255)                    NOT NULL                                COMMENT '상품명',
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id)
 ) COMMENT '주문 정보를 저장하는 테이블';
