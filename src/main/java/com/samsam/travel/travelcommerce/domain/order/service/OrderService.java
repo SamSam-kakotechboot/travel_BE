@@ -31,7 +31,6 @@ import static com.samsam.travel.travelcommerce.global.status.ErrorCode.*;
 
 /**
  * 주문 관련 작업을 담당하는 서비스 클래스입니다.
- * <p>
  * * @author lavin
  * * @since 1.0
  */
@@ -63,22 +62,15 @@ public class OrderService {
         orderRepository.saveAll(ordersList);
     }
 
+    /**
+     * 사용자 ID를 받아서 모든 주문한 상품을 조회합니다,
+     *
+     * @param userId       사용자 ID
+     */
     public List<OrderListResponse> getAllOrders(String userId) {
         return orderRepository.findOrdersByUserId(userId)
                 .stream()
-                .map(order -> {
-                    // order 엔티티에서 OrderListResponse를 생성할 때 ticketTitle을 포함시킵니다.
-                    return OrderListResponse.builder()
-                            .orderId(order.getOrderId())
-                            .userId(order.getUser().getUserId())
-                            .ticketId(order.getTicket().getTicketId())
-                            .ticketTitle(order.getTicketTitle())  // 티켓 제목 추가
-                            .orderDate(order.getOrderDate())
-                            .totalAmount(order.getTotalAmount())
-                            .quantity(order.getQuantity())
-                            .status(order.getStatus())
-                            .build();
-                })
+                .map(this::buildOrderListResponse)
                 .collect(Collectors.toList());
     }
 
@@ -187,5 +179,23 @@ public class OrderService {
         if (!userRepository.findRoleByUserId(adminId).equals(Role.MASTER)) {
             throw new UserUnauthorizedException(USER_NOT_MASTER);
         }
+    }
+
+    /**
+     * 주문 정보를 통해 객체를 생성합니다.
+     *
+     * @param order 주문
+     */
+    private OrderListResponse buildOrderListResponse(Orders order) {
+        return OrderListResponse.builder()
+                .orderId(order.getOrderId())
+                .userId(order.getUser().getUserId())
+                .ticketId(order.getTicket().getTicketId())
+                .ticketTitle(order.getTicketTitle())  // 티켓 제목 추가
+                .orderDate(order.getOrderDate())
+                .totalAmount(order.getTotalAmount())
+                .quantity(order.getQuantity())
+                .status(order.getStatus())
+                .build();
     }
 }

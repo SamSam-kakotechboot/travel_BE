@@ -30,7 +30,7 @@ import static com.samsam.travel.travelcommerce.global.status.ErrorCode.BAD_REQUE
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/tickets")
+@RequestMapping("/api/tickets")
 public class TicketController {
 
     private final TicketService ticketService;
