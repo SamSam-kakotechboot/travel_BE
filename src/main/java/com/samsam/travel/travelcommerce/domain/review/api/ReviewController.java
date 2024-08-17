@@ -41,25 +41,29 @@ public class ReviewController {
     /**
      * 리뷰 등록 API
      *
-     * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
+     * @param userDetails  인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
      * @param reviewAddDto 리뷰 추가에 필요한 정보
      * @return 리뷰 등록 성공 여부, 문구와 리뷰 데이터
      */
     @PostMapping("/regist")
     public ResponseEntity<ApiResponse<ReviewResponseDto>> addReview(@AuthenticationPrincipal UserDetails userDetails, @RequestBody ReviewAddDto reviewAddDto) {
-        if(reviewAddDto.isValidate()) {
+        if (reviewAddDto.isValidate()) {
             throw new ReviewInvalidInputException(BAD_REQUEST_INVALID_REVIEW_VALUES);
+        }
+
+        String userId = userDetails.getUsername(); // 사용자 ID 가져오기
+        String orderId = reviewAddDto.getOrderId();
+        String ticketId = reviewAddDto.getTicketId();
+
+        if (reviewService.getMyOrderReview(userId, orderId, ticketId) != null) {
+            throw new ReviewDuplicatedException(DUPLICATED_REVIEW_VALUES);
         }
 
         ReviewDto reviewDto = new ReviewDto();
         setUser(userDetails, reviewDto);
-        setTicket(reviewDto, reviewAddDto.getTicketId());
-        setOrder(reviewDto, reviewAddDto.getOrderId());
+        setTicket(reviewDto, ticketId);
+        setOrder(reviewDto, orderId);
         reviewDto.setReviewAddData(reviewAddDto);
-
-        if(reviewService.getMyOrderReview(reviewDto) != null) {
-            throw new ReviewDuplicatedException(DUPLICATED_REVIEW_VALUES);
-        }
 
         return ResponseUtil.createApiResponse(SUCCESS_ADD_REVIEW, reviewService.addReview(reviewDto));
     }
@@ -72,7 +76,7 @@ public class ReviewController {
      */
     @DeleteMapping("/remove")
     public ResponseEntity<ApiResponse<Boolean>> removeReview(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String reviewId) {
-        if(StringUtils.isBlank(reviewId)) {
+        if (StringUtils.isBlank(reviewId)) {
             throw new ReviewInvalidInputException(BAD_REQUEST_INVALID_REVIEW_VALUES);
         }
 
@@ -104,7 +108,7 @@ public class ReviewController {
      * @return 리뷰 등록 성공 여부, 문구와 리뷰 데이터
      */
     @GetMapping("/view/ticket")
-    public ResponseEntity<ApiResponse<List<ReviewResponseDto>>> getAllReviewByTicket(@RequestParam String ticketId) {
+    public ResponseEntity<ApiResponse<List<ReviewResponseDto>>> getAllReviewByTicket(@RequestParam("ticketId") String ticketId) {
         return ResponseUtil.createApiResponse(SUCCESS_VIEW_ALL_REVIEW_BY_TICKET, reviewService.getAllReviewByTicket(ticketId));
     }
 
@@ -112,13 +116,13 @@ public class ReviewController {
      * Respose
      *
      * @param reviewDto 리뷰에 대한 정보
-     * @param ticketId 티켓 아이디
+     * @param ticketId  티켓 아이디
      * @return 상품 수정 여부, 문구와 상품 데이터
      */
     public void setTicket(ReviewDto reviewDto, String ticketId) {
         Ticket ticket = Ticket.builder()
-                            .ticketId(ticketId)
-                            .build();
+                .ticketId(ticketId)
+                .build();
         reviewDto.setTicket(ticket);
     }
 
@@ -126,13 +130,13 @@ public class ReviewController {
      * Respose
      *
      * @param reviewDto 리뷰에 대한 정보
-     * @param orderId 주문 아이디
+     * @param orderId   주문 아이디
      * @return 상품 수정 여부, 문구와 상품 데이터
      */
     public void setOrder(ReviewDto reviewDto, String orderId) {
         Orders order = Orders.builder()
-                            .orderId(orderId)
-                            .build();
+                .orderId(orderId)
+                .build();
         reviewDto.setOrders(order);
     }
 
@@ -140,7 +144,7 @@ public class ReviewController {
      * Respose
      *
      * @param userDetails 인증된 관리자의 세부 정보. Spring Security 컨텍스트에서 가져옵니다.
-     * @param reviewDto 리뷰에 대한 정보
+     * @param reviewDto   리뷰에 대한 정보
      * @return 상품 수정 여부, 문구와 상품 데이터
      */
     public void setUser(UserDetails userDetails, ReviewDto reviewDto) {
@@ -154,10 +158,9 @@ public class ReviewController {
      * @return User 정보를 담은 user Entity 반환
      */
     public User getUser(UserDetails userDetails) {
-        return  User
+        return User
                 .builder()
                 .userId(userDetails.getUsername())
-                .password(userDetails.getPassword())
                 .build();
     }
 }

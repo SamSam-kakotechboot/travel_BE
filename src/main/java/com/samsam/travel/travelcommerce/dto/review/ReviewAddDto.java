@@ -18,13 +18,13 @@ public class ReviewAddDto {
     private String ticketId;
     private String comment;
     private float rating;
+    private String userId;
 
     public boolean isValidate() {
-        return !(
-            StringUtils.isNotBlank(orderId)
-            && StringUtils.isNotBlank(ticketId)
-            && StringUtils.isNotBlank(comment)
-            && rating > 0
-        );
+        // 필드가 모두 유효한 경우 true를 반환
+        return !(StringUtils.isNotBlank(orderId)
+                && StringUtils.isNotBlank(ticketId)
+                && StringUtils.isNotBlank(comment)
+                && rating > 0);
     }
 }

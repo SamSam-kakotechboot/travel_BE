@@ -72,6 +72,11 @@ public class Review {
     }
 
     public static Review convertDtoToEntity(ReviewDto reviewDto) {
+        // Null check 추가
+        if (reviewDto.getOrders() == null || reviewDto.getUser() == null || reviewDto.getTicket() == null) {
+            throw new IllegalArgumentException("Orders, User, and Ticket cannot be null");
+        }
+
         return Review.builder()
                 .reviewId(reviewDto.getReviewId())
                 .user(reviewDto.getUser())
@@ -82,5 +87,4 @@ public class Review {
                 .deleteYn("N")
                 .build();
     }
-
 }

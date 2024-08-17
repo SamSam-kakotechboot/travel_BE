@@ -7,7 +7,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, String> {
+
+    @Query("SELECT u FROM User u WHERE u.userId = ?1")
+    Optional<User> findByUserId(String userId);
 
     /**
      * 사용자 ID로 역할을 찾아 반환합니다.

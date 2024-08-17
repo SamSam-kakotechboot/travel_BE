@@ -33,17 +33,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewResponseDto getMyOrderReview(ReviewDto reviewDto) {
-        Review review = repository.findMyReview(Review.convertDtoToEntity(reviewDto));
-        if(review == null) {
+    public ReviewResponseDto getMyOrderReview(String userId, String orderId, String ticketId) {
+        Review review = repository.findMyReview(userId, orderId, ticketId);
+        if (review == null) {
             return null;
         }
-        return ReviewResponseDto.convertEntityToDto(repository.findMyReview(Review.convertDtoToEntity(reviewDto)));
+        return ReviewResponseDto.convertEntityToDto(review);
     }
 
     @Override
     public List<ReviewResponseDto> getMyAllReview(ReviewDto reviewDto) {
-        return repository.findMyAllReview(Review.convertDtoToEntity(reviewDto)).stream()
+        return repository.findMyAllReview(reviewDto.getUser().getUserId()).stream()
                 .map(ReviewResponseDto::convertEntityToDto)
                 .collect(Collectors.toList());
     }

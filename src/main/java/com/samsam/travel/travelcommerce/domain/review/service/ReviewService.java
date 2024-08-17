@@ -11,7 +11,7 @@ public interface ReviewService {
 
     public boolean removeReview(ReviewDto reviewDto);
 
-    public ReviewResponseDto getMyOrderReview(ReviewDto reviewDto);
+    ReviewResponseDto getMyOrderReview(String userId, String orderId, String ticketId);
 
     public List<ReviewResponseDto> getMyAllReview(ReviewDto reviewDto);
 
