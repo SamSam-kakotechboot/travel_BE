@@ -29,7 +29,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public boolean removeReview(ReviewDto reviewDto) {
-        return repository.deleteMyReview(Review.convertDtoToEntity(reviewDto)) > 0;
+        return repository.deleteMyReview(reviewDto.getReviewId()) > 0;
     }
 
     @Override

@@ -66,4 +66,20 @@ public class ImageController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @DeleteMapping("/review/{reviewId}")
+    public ResponseEntity<?> deleteReviewImage(@PathVariable("reviewId") String reviewId) {
+        try {
+            boolean isDeleted = imageService.deleteReviewImage(reviewId);
+
+            if (isDeleted) {
+                return ResponseEntity.ok().build(); // 파일이 존재하고 성공적으로 삭제된 경우 200 OK 응답
+            } else {
+                // 파일이 없거나 이미 삭제된 경우에도 성공 응답을 반환
+                return ResponseEntity.ok().body("파일이 존재하지 않거나 이미 삭제되었습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("이미지 삭제 중 오류가 발생했습니다."); // 예외 발생 시 500 에러 응답
+        }
+    }
 }

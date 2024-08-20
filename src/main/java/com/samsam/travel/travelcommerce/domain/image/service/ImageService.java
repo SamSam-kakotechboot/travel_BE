@@ -50,10 +50,22 @@ public class ImageService {
 
     public void saveReviewImage(String reviewId, MultipartFile image) throws IOException {
         // 특수문자를 제거한 리뷰 ID로 파일 이름을 설정하고 확장자를 추가
-        String sanitizedReviewId = reviewId.replaceAll("[^a-zA-Z0-9-_]", "");
-        Path filePath = reviewImagesLocation.resolve(sanitizedReviewId + ".png");
+        Path filePath = reviewImagesLocation.resolve(reviewId + ".png");
 
         // 이미지 저장
         Files.copy(image.getInputStream(), filePath);
+    }
+
+    public boolean deleteReviewImage(String reviewId) {
+        try {
+            Path filePath = reviewImagesLocation.resolve(reviewId + ".png");
+
+            // 파일 삭제 시도
+            return Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            // 예외 발생 시 false 반환
+            e.printStackTrace();
+            return false;
+        }
     }
 }
