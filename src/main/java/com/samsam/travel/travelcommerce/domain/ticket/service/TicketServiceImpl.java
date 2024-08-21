@@ -29,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<TicketSearchResponseDto> getAllTicket(SearchDto searchDto) {
         Pageable pageable = PageRequest.of(searchDto.getPageNumber() - 1, searchDto.getPageSize());
-        List<Object[]> result = repository.findAll(searchDto.getKeyword(), pageable);
+        List<Object[]> result = repository.findAll(searchDto.getKeyword().toLowerCase(), pageable);
         return result.stream()
                 .map(TicketSearchResponseDto::convertToDto)
                 .collect(Collectors.toList());
