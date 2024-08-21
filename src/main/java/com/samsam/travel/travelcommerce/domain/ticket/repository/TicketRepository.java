@@ -12,6 +12,9 @@ import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, String> {
 
+    @Query("SELECT COUNT(t) FROM Ticket t")
+    long countTickets();
+
     @Modifying
     @Transactional
     @Query(

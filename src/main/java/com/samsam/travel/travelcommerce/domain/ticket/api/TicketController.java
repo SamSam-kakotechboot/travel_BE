@@ -1,10 +1,7 @@
 package com.samsam.travel.travelcommerce.domain.ticket.api;
 
 import com.samsam.travel.travelcommerce.domain.ticket.service.TicketService;
-import com.samsam.travel.travelcommerce.dto.ticket.SearchDto;
-import com.samsam.travel.travelcommerce.dto.ticket.TicketDto;
-import com.samsam.travel.travelcommerce.dto.ticket.TicketResponseDto;
-import com.samsam.travel.travelcommerce.dto.ticket.TicketSearchResponseDto;
+import com.samsam.travel.travelcommerce.dto.ticket.*;
 import com.samsam.travel.travelcommerce.entity.User;
 import com.samsam.travel.travelcommerce.global.error.exception.TicketInvalidInputException;
 import com.samsam.travel.travelcommerce.utils.ApiResponse;
@@ -20,6 +17,7 @@ import java.util.List;
 
 import static com.samsam.travel.travelcommerce.global.status.CommonCode.*;
 import static com.samsam.travel.travelcommerce.global.status.ErrorCode.BAD_REQUEST_INVALID_TICKET_VALUES;
+import com.samsam.travel.travelcommerce.dto.ticket.TicketSearchResultDto;
 
 /**
  * 상품(티켓)에 관련된 API를 수행하는 컨트롤러입니다.
@@ -41,13 +39,19 @@ public class TicketController {
      * @param searchDto 검색 정보가 담겨져 있음(keyword, pageNum, pageSize)
      * @return 상품 조회 성공 여부, 문구와 상품 데이터
      */
+
     @GetMapping("/view/all")
-    public ResponseEntity<ApiResponse<List<TicketSearchResponseDto>>> searchAllTicket(@ModelAttribute SearchDto searchDto) {
+    public ResponseEntity<ApiResponse<TicketSearchResultDto>> searchAllTicket(@ModelAttribute SearchDto searchDto) {
         if (searchDto.isValidate()) {
             throw new TicketInvalidInputException(BAD_REQUEST_INVALID_TICKET_VALUES);
         }
 
-        return ResponseUtil.createApiResponse(SUCCESS_VIEW_TICKET, ticketService.getAllTicket(searchDto));
+        List<TicketSearchResponseDto> tickets = ticketService.getAllTicket(searchDto);
+        long totalCount = ticketService.getTotalTicketCount(searchDto);
+
+        TicketSearchResultDto result = new TicketSearchResultDto(tickets, totalCount);
+
+        return ResponseUtil.createApiResponse(SUCCESS_VIEW_TICKET, result);
     }
 
     /**

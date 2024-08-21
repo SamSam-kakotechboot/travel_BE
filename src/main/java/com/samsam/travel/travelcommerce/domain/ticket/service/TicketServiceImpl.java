@@ -26,6 +26,10 @@ public class TicketServiceImpl implements TicketService {
 
     private final Common common;
 
+    public long getTotalTicketCount(SearchDto searchDto) {
+        return repository.countTickets();
+    }
+
     @Override
     public List<TicketSearchResponseDto> getAllTicket(SearchDto searchDto) {
         Pageable pageable = PageRequest.of(searchDto.getPageNumber() - 1, searchDto.getPageSize());
