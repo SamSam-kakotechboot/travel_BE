@@ -48,9 +48,8 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
             "UPDATE Review r " +
                     "SET " +
                     "r.deleteYn         =   'Y' " +
-                    "WHERE r.reviewId       =   :#{#review.reviewId} " +
-                    "AND r.user.userId  =   :#{#review.user.userId} "
+                    "WHERE r.reviewId       = :reviewId  "
     )
-    int deleteMyReview(Review review);
+    int deleteMyReview(@Param("reviewId") String reviewId);
 
 }

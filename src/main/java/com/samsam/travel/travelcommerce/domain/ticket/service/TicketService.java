@@ -18,4 +18,6 @@ public interface TicketService {
     public int updateTicket(TicketDto ticketDto);
 
     public void removeTicket(TicketDto ticketDto);
+
+    public long getTotalTicketCount(SearchDto searchDto);
 }

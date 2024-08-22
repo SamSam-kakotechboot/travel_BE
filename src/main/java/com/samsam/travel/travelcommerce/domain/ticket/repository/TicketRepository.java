@@ -12,6 +12,9 @@ import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, String> {
 
+    @Query("SELECT COUNT(t) FROM Ticket t")
+    long countTickets();
+
     @Modifying
     @Transactional
     @Query(
@@ -28,25 +31,27 @@ public interface TicketRepository extends JpaRepository<Ticket, String> {
     )
     int updateTicket(Ticket ticket);
 
-    @Query(
-            "SELECT " +
-                    "t.ticketId, " +
-                    "t.user, " +
-                    "t.title, " +
-                    "t.place, " +
-                    "t.price, " +
-                    "t.startDate, " +
-                    "t.endDate, " +
-                    "t.deleteYn, " +
-                    "t.registDate, " +
-                    "t.updateDate, " +
-                    "COALESCE(AVG(r.rating), 0) as avgRating " +
-                    "FROM Ticket t " +
-                    "LEFT JOIN t.reviews r " +
-                    "GROUP BY t.ticketId " +
-                    "ORDER BY t.registDate DESC "
+    @Query("SELECT " +
+            "t.ticketId, " +
+            "t.user, " +
+            "t.title, " +
+            "t.place, " +
+            "t.price, " +
+            "t.startDate, " +
+            "t.endDate, " +
+            "t.deleteYn, " +
+            "t.registDate, " +
+            "t.updateDate, " +
+            "COALESCE(AVG(CASE WHEN r.deleteYn = 'N' THEN r.rating ELSE null END), 0) as avgRating " +
+            "FROM Ticket t " +
+            "LEFT JOIN t.reviews r ON r.deleteYn = 'N' " +
+            "GROUP BY t.ticketId " +
+            "ORDER BY " +
+            "CASE WHEN LOWER(:keyword) = 'price' THEN t.price END ASC, " +
+            "CASE WHEN LOWER(:keyword) = 'rating' THEN AVG(CASE WHEN r.deleteYn = 'N' THEN r.rating ELSE null END) END DESC, " +
+            "CASE WHEN LOWER(:keyword) = 'latest' THEN t.registDate END DESC"
     )
-    List<Object[]> findAll(String keyword, Pageable pageable);
+    List<Object[]> findAll(@Param("keyword") String keyword, Pageable pageable);
 
 
     @Modifying

@@ -75,7 +75,7 @@ public class ReviewController {
      * @return 리뷰 등록 성공 여부, 문구와 리뷰 데이터
      */
     @DeleteMapping("/remove")
-    public ResponseEntity<ApiResponse<Boolean>> removeReview(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String reviewId) {
+    public ResponseEntity<ApiResponse<Boolean>> removeReview(@AuthenticationPrincipal UserDetails userDetails, @RequestParam("reviewId") String reviewId) {
         if (StringUtils.isBlank(reviewId)) {
             throw new ReviewInvalidInputException(BAD_REQUEST_INVALID_REVIEW_VALUES);
         }
@@ -83,6 +83,8 @@ public class ReviewController {
         ReviewDto reviewDto = new ReviewDto();
         setUser(userDetails, reviewDto);
         reviewDto.setReviewId(reviewId);
+        setTicket(reviewDto, " ");
+        setOrder(reviewDto, " ");
 
         return ResponseUtil.createApiResponse(SUCCESS_DELETE_REVIEW, reviewService.removeReview(reviewDto));
     }
