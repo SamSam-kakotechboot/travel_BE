@@ -49,6 +49,15 @@ public class OrderController {
     }
 
     /**
+     * 판매자가 모든 대기중 상품을 조회합니다.
+     */
+    @GetMapping("/master")
+    public ResponseEntity<ApiResponse<List<OrderListResponse>>> getAllOrdersByMaster() {
+        List<OrderListResponse> allOrders = orderService.getAllOrdersByMaster();
+        return ResponseUtil.createApiResponse(SUCCESS_ALL_ORDER_LIST, allOrders);
+    }
+
+    /**
      * 주문을 취소합니다.
      *
      * @param userDetails 취소할 주문을 요청한 사용자. 인증 주체에서 가져옵니다.

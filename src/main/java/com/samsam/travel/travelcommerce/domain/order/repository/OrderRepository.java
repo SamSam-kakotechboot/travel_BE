@@ -14,6 +14,9 @@ public interface OrderRepository extends JpaRepository<Orders, String> {
     @Query("SELECT o FROM Orders o WHERE o.user.userId = :userId")
     List<Orders> findOrdersByUserId(@Param("userId") String userId);
 
+    @Query("SELECT o FROM Orders o WHERE o.status = 'P'")
+    List<Orders> findOrdersByMaster();
+
     /**
      * 주문 상태를 'C'(Complete)으로 업데이트합니다.
      *     *

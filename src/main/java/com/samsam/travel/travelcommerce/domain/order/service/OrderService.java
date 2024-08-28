@@ -75,6 +75,16 @@ public class OrderService {
     }
 
     /**
+     * 판매자가 모든 대기중 상품을 조회합니다.
+     */
+    public List<OrderListResponse> getAllOrdersByMaster() {
+        return orderRepository.findOrdersByMaster()
+                .stream()
+                .map(this::buildOrderListResponse)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * 지정된 주문 ID와 사용자 ID를 기반으로 주문을 취소합니다.
      *
      * @param orderId 취소할 주문의 고유 ID
