@@ -53,14 +53,12 @@ public interface TicketRepository extends JpaRepository<Ticket, String> {
     )
     List<Object[]> findAll(@Param("keyword") String keyword, Pageable pageable);
 
-
     @Modifying
     @Transactional
     @Query(
-            "UPDATE Ticket t " +
-                    "SET t.deleteYn         =   'Y' " +
-                    "WHERE t.ticketId       =   :#{#ticket.ticketId} " +
-                    "AND t.user.userId  =   :#{#ticket.user.userId} "
+            "DELETE FROM Ticket t " +
+                    "WHERE t.ticketId = :#{#ticket.ticketId} " +
+                    "AND t.user.userId = :#{#ticket.user.userId}"
     )
     void deleteTicket(Ticket ticket);
 }
