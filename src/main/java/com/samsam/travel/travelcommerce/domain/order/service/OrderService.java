@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.samsam.travel.travelcommerce.entity.model.OrderStatus.P;
 import static com.samsam.travel.travelcommerce.global.status.ErrorCode.*;
 
 /**
@@ -65,10 +64,20 @@ public class OrderService {
     /**
      * 사용자 ID를 받아서 모든 주문한 상품을 조회합니다,
      *
-     * @param userId       사용자 ID
+     * @param userId 사용자 ID
      */
     public List<OrderListResponse> getAllOrders(String userId) {
         return orderRepository.findOrdersByUserId(userId)
+                .stream()
+                .map(this::buildOrderListResponse)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 판매자가 모든 대기중 상품을 조회합니다.
+     */
+    public List<OrderListResponse> getAllOrdersByMaster() {
+        return orderRepository.findOrdersByMaster()
                 .stream()
                 .map(this::buildOrderListResponse)
                 .collect(Collectors.toList());
@@ -94,17 +103,18 @@ public class OrderService {
     }
 
     /**
-     * 지정된 주문 ID와 관리자 ID를 기반으로 주문을 승인합니다.
-     * 승인된 주문은 '완료'(C) 상태로 변경됩니다.
+     * 지정된 주문 ID 목록과 관리자 ID를 기반으로 여러 주문을 한 번에 승인합니다.
+     * 승인된 주문들은 '완료'(C) 상태로 변경됩니다.
      *
-     * @param orderId 승인할 주문의 고유 ID
-     * @param adminId 승인할 주문을 요청한 관리자의 ID
+     * @param orderIds 승인할 주문들의 고유 ID 목록
+     * @param adminId  승인할 주문을 요청한 관리자의 ID
      * @throws UserUnauthorizedException 사용자가 승인할 권한이 없는 경우
      */
-    public void approveOrder(String orderId, String adminId) {
+    @Transactional
+    public void approveOrders(List<String> orderIds, String adminId) {
         validateMasterRole(adminId);
 
-        orderRepository.completeOrderById(orderId);
+        orderRepository.completeOrdersByIds(orderIds);
     }
 
     /**

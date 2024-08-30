@@ -14,17 +14,16 @@ public interface OrderRepository extends JpaRepository<Orders, String> {
     @Query("SELECT o FROM Orders o WHERE o.user.userId = :userId")
     List<Orders> findOrdersByUserId(@Param("userId") String userId);
 
+    @Query("SELECT o FROM Orders o WHERE o.status = 'P'")
+    List<Orders> findOrdersByMaster();
+
     /**
-     * 주문 상태를 'C'(Complete)으로 업데이트합니다.
-     *     *
-     * @param orderId 취소할 주문의 고유 ID.
+     * 여러 주문의 상태를 'C'(Complete)로 한 번에 업데이트합니다.
      *
-     * @throws IllegalArgumentException orderId가 null이거나 빈 경우.
-     *
-     * @see Orders
+     * @param orderIds 완료할 주문들의 고유 ID 목록.
      */
     @Transactional
     @Modifying
-    @Query("UPDATE Orders o SET o.status = 'C' WHERE o.orderId = :orderId")
-    void completeOrderById(String orderId);
+    @Query("UPDATE Orders o SET o.status = 'C' WHERE o.orderId IN :orderIds")
+    void completeOrdersByIds(@Param("orderIds") List<String> orderIds);
 }

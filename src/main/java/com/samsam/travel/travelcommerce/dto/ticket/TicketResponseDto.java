@@ -53,8 +53,8 @@ public class TicketResponseDto {
     }
 
     private double calculateAverageRating(Ticket ticket) {
-        // 리뷰가 없을 경우 0.0 반환
-        if (ticket.getReviews().isEmpty()) {
+        // 리뷰가 null이거나 없을 경우 0.0 반환
+        if (ticket.getReviews() == null || ticket.getReviews().isEmpty()) {
             return 0.0;
         }
 

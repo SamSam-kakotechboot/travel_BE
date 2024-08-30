@@ -83,8 +83,6 @@ public class ReviewController {
         ReviewDto reviewDto = new ReviewDto();
         setUser(userDetails, reviewDto);
         reviewDto.setReviewId(reviewId);
-        setTicket(reviewDto, " ");
-        setOrder(reviewDto, " ");
 
         return ResponseUtil.createApiResponse(SUCCESS_DELETE_REVIEW, reviewService.removeReview(reviewDto));
     }

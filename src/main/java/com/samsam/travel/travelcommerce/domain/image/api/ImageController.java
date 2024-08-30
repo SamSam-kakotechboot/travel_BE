@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
 
 @RestController
 @RequestMapping("/api/images")
@@ -42,11 +41,26 @@ public class ImageController {
     public ResponseEntity<?> uploadReviewImage(
             @RequestParam("reviewId") String reviewId,
             @RequestParam("image") MultipartFile image) {
+
         try {
             imageService.saveReviewImage(reviewId, image);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.status(500).body("이미지 업로드 중 오류가 발생했습니다.");
+        }
+    }
+
+    @PostMapping("/uploadTicketImage")
+    public ResponseEntity<?> uploadTicketImage(
+            @RequestParam("title") String title,
+            @RequestParam("image") MultipartFile image) {
+        try {
+            System.out.println("Title: " + title);
+            System.out.println("Image Original Filename: " + image.getOriginalFilename());
+            imageService.saveTicketImage(title, image);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("티켓 이미지 업로드 중 오류가 발생했습니다.");
         }
     }
 
@@ -73,13 +87,27 @@ public class ImageController {
             boolean isDeleted = imageService.deleteReviewImage(reviewId);
 
             if (isDeleted) {
-                return ResponseEntity.ok().build(); // 파일이 존재하고 성공적으로 삭제된 경우 200 OK 응답
+                return ResponseEntity.ok().build();
             } else {
-                // 파일이 없거나 이미 삭제된 경우에도 성공 응답을 반환
                 return ResponseEntity.ok().body("파일이 존재하지 않거나 이미 삭제되었습니다.");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("이미지 삭제 중 오류가 발생했습니다."); // 예외 발생 시 500 에러 응답
+            return ResponseEntity.status(500).body("이미지 삭제 중 오류가 발생했습니다.");
+        }
+    }
+
+    @DeleteMapping("/ticket/{title}")
+    public ResponseEntity<?> deleteTicketImage(@PathVariable("title") String title) {
+        try {
+            boolean isDeleted = imageService.deleteTicketImage(title);
+
+            if (isDeleted) {
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.ok().body("파일이 존재하지 않거나 이미 삭제되었습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("티켓 이미지 삭제 중 오류가 발생했습니다.");
         }
     }
 }

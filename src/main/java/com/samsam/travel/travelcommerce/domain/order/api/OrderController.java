@@ -32,7 +32,7 @@ public class OrderController {
     /**
      * 새로운 주문을 생성합니다.
      *
-     * @param userDetails 주문을 생성하는 사용자. 인증 주체에서 가져옵니다.
+     * @param userDetails  주문을 생성하는 사용자. 인증 주체에서 가져옵니다.
      * @param orderRequest 생성할 주문의 세부 정보.
      * @return 성공 상태와 메시지를 포함하는 API 응답을 포함하는 응답 엔티티.
      */
@@ -49,12 +49,21 @@ public class OrderController {
     }
 
     /**
+     * 판매자가 모든 대기중 상품을 조회합니다.
+     */
+    @GetMapping("/master")
+    public ResponseEntity<ApiResponse<List<OrderListResponse>>> getAllOrdersByMaster() {
+        List<OrderListResponse> allOrders = orderService.getAllOrdersByMaster();
+        return ResponseUtil.createApiResponse(SUCCESS_ALL_ORDER_LIST, allOrders);
+    }
+
+    /**
      * 주문을 취소합니다.
      *
      * @param userDetails 취소할 주문을 요청한 사용자. 인증 주체에서 가져옵니다.
-     * @param orderId 취소할 주문의 ID.
+     * @param orderId     취소할 주문의 ID.
      * @return 성공 상태와 메시지를 포함하는 API 응답을 포함하는 응답 엔티티.
-     *         취소 성공 시, SUCCESS_ORDER_CANCEL 상태와 취소된 주문 ID를 포함하는 메시지를 반환합니다.
+     * 취소 성공 시, SUCCESS_ORDER_CANCEL 상태와 취소된 주문 ID를 포함하는 메시지를 반환합니다.
      */
     @DeleteMapping("/{orderId}")
     public ResponseEntity<ApiResponse> cancelOrder(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String orderId) {
@@ -64,17 +73,20 @@ public class OrderController {
     }
 
     /**
- * 주문을 승인합니다.
- *
- * @param userDetails 승인할 주문을 요청한 사용자. 인증 주체에서 가져옵니다.
- * @param orderId 승인할 주문의 ID.
- * @return 성공 상태와 메시지를 포함하는 API 응답을 포함하는 응답 엔티티.
- *         승인 성공 시, SUCCESS_ORDER_APPROVE 상태와 승인된 주문 ID를 포함하는 메시지를 반환합니다.
- */
-@GetMapping("/{orderId}/approve")
-public ResponseEntity<ApiResponse> approveOrder(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String orderId) {
-    orderService.approveOrder(orderId, userDetails.getUsername());
-    String formattedMessage = String.format(SUCCESS_ORDER_APPROVE.getMessage(), orderId);
-    return ResponseUtil.createApiResponse(SUCCESS_ORDER_APPROVE, formattedMessage);
-}
+     * 주문을 승인합니다.
+     *
+     * @param userDetails 승인할 주문을 요청한 사용자. 인증 주체에서 가져옵니다.
+     * @param orderIds    승인할 주문의 ID들.
+     * @return 성공 상태와 메시지를 포함하는 API 응답을 포함하는 응답 엔티티.
+     * 승인 성공 시, SUCCESS_ORDER_APPROVE 상태와 승인된 주문 ID를 포함하는 메시지를 반환합니다.
+     */
+    @PostMapping("/approve")
+    public ResponseEntity<ApiResponse> approveOrders(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody List<String> orderIds) {
+        System.out.println(orderIds.toString());
+        orderService.approveOrders(orderIds, userDetails.getUsername());
+        String formattedMessage = String.format(SUCCESS_ORDER_APPROVE.getMessage(), orderIds.size());
+        return ResponseUtil.createApiResponse(SUCCESS_ORDER_APPROVE, formattedMessage);
+    }
 }
