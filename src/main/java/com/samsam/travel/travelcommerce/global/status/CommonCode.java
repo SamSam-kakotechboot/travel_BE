@@ -136,8 +136,6 @@ public enum CommonCode {
     SUCCESS_ORDER_APPROVE(HttpStatus.OK, "2203", "%s 주문이 성공적으로 승인되었습니다.");
 
 
-
-    ;
     private final HttpStatus httpStatus;
     private final String statusCode;
     private final String message;
