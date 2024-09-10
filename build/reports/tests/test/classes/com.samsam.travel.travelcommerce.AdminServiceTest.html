@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - AdminServiceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>AdminServiceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.samsam.travel.travelcommerce.html">com.samsam.travel.travelcommerce</a> &gt; AdminServiceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.030s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">updateUserRole_shouldThrowUserUnauthorizedException_whenAdminIdIsNotMasterRole()</td>
+<td class="success">0.030s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2024-08-17T13:17:59.112+09:00  INFO 39979 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.samsam.travel.travelcommerce.AdminServiceTest]: AdminServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-08-17T13:17:59.114+09:00  INFO 39979 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.samsam.travel.travelcommerce.TravelCommerceApplication for test class com.samsam.travel.travelcommerce.AdminServiceTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.2)
+
+2024-08-17T13:17:59.138+09:00  INFO 39979 --- [    Test worker] c.s.t.travelcommerce.AdminServiceTest    : Starting AdminServiceTest using Java 17.0.12 with PID 39979 (started by lavin in /Users/lavin/github_project/travel_BE)
+2024-08-17T13:17:59.138+09:00  INFO 39979 --- [    Test worker] c.s.t.travelcommerce.AdminServiceTest    : The following 1 profile is active: &quot;local&quot;
+2024-08-17T13:17:59.251+09:00  INFO 39979 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-17T13:17:59.265+09:00  INFO 39979 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 5 JPA repository interfaces.
+2024-08-17T13:17:59.324+09:00  INFO 39979 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-17T13:17:59.325+09:00  INFO 39979 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-17T13:17:59.331+09:00  INFO 39979 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-17T13:17:59.331+09:00  INFO 39979 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-08-17T13:17:59.371+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection opened. {executed in 39ms} 
+2024-08-17T13:17:59.371+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.new Connection returned 
+2024-08-17T13:17:59.371+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getNetworkTimeout() returned 0
+2024-08-17T13:17:59.371+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.371+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.372+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.isValid(1) returned true
+2024-08-17T13:17:59.372+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getTransactionIsolation() returned 4
+2024-08-17T13:17:59.372+09:00  INFO 39979 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@4b77d80e
+2024-08-17T13:17:59.372+09:00  INFO 39979 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-08-17T13:17:59.372+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaDataUsingInfoSchema@60cc749d
+2024-08-17T13:17:59.373+09:00  WARN 39979 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-17T13:17:59.373+09:00  WARN 39979 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getCatalog() returned ktb_samsam
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getSchema() returned null
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getSchema() returned null
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaDataUsingInfoSchema@40f2ae53
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.createClob() returned com.mysql.cj.jdbc.Clob@3f67d229
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.createNClob() returned com.mysql.cj.jdbc.NClob@4a25da63
+2024-08-17T13:17:59.373+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.clearWarnings() returned 
+2024-08-17T13:17:59.450+09:00  INFO 39979 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-17T13:17:59.450+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.450+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaDataUsingInfoSchema@3ca1f0a4
+2024-08-17T13:17:59.466+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.466+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`ticket` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@4d2cd74
+2024-08-17T13:17:59.467+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`ticket` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.467+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.467+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@157f284b
+2024-08-17T13:17:59.467+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@15c5c99 - Field level information: 
+	com.mysql.cj.result.Field@32cbb8c6[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=ticket_id,originalColumnName=ticket_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@20e06a86[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= MULTI_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4c3133a1[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@2fea162a[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=contents,originalColumnName=contents,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@40889699[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=place,originalColumnName=place,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@639f7054[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=price,originalColumnName=price,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@26f6fbbd[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=start_date,originalColumnName=start_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@59d2e20f[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=end_date,originalColumnName=end_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@5dea8bf2[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=delete_yn,originalColumnName=delete_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@45ef4dcb[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=veiw_yn,originalColumnName=veiw_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@54557dd8[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@1a593fc7[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=update_date,originalColumnName=update_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@13e59265[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=view_yn,originalColumnName=view_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+2024-08-17T13:17:59.468+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|ticket_id |user_id |title |contents |place |price |start_date |end_date |delete_yn |veiw_yn |regist_date |update_date |view_yn |
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+
+2024-08-17T13:17:59.468+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.468+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.470+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.470+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`user` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@539f0729
+2024-08-17T13:17:59.470+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`user` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.470+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.470+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@ebad9a
+2024-08-17T13:17:59.471+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@3fa27158 - Field level information: 
+	com.mysql.cj.result.Field@4b2b2757[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@6026c754[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=password,originalColumnName=password,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3d7c21b7[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@11f8bff1[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=phone,originalColumnName=phone,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3fb2306[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=role,originalColumnName=role,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@5531484a[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-08-17T13:17:59.471+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|--------|---------|-----|------|-----|------------|
+|user_id |password |name |phone |role |regist_date |
+|--------|---------|-----|------|-----|------------|
+|--------|---------|-----|------|-----|------------|
+
+2024-08-17T13:17:59.471+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.471+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.478+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.478+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`ticket` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@5dcf8b37
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`ticket` where 1=0  {executed in 1 ms}
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@776609b
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@58da1b27 - Field level information: 
+	com.mysql.cj.result.Field@347c6044[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=ticket_id,originalColumnName=ticket_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@154bc3cf[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= MULTI_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@210d1b45[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@29862f60[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=contents,originalColumnName=contents,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@7e2f1454[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=place,originalColumnName=place,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@35b1e5e5[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=price,originalColumnName=price,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@7caf0725[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=start_date,originalColumnName=start_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@644acaff[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=end_date,originalColumnName=end_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@6241ef96[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=delete_yn,originalColumnName=delete_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@5865b0f6[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=veiw_yn,originalColumnName=veiw_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@5c7712f0[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@6ed836b3[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=update_date,originalColumnName=update_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@38849a1[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=view_yn,originalColumnName=view_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|ticket_id |user_id |title |contents |place |price |start_date |end_date |delete_yn |veiw_yn |regist_date |update_date |view_yn |
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+
+2024-08-17T13:17:59.479+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.480+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`user` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@129bc797
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`user` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@3dd916d9
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@7cdd8582 - Field level information: 
+	com.mysql.cj.result.Field@771047b4[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3bfb81be[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=password,originalColumnName=password,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4ee127c6[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@5e805a0d[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=phone,originalColumnName=phone,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@2bd89b8e[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=role,originalColumnName=role,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4c49193a[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-08-17T13:17:59.481+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|--------|---------|-----|------|-----|------------|
+|user_id |password |name |phone |role |regist_date |
+|--------|---------|-----|------|-----|------------|
+|--------|---------|-----|------|-----|------------|
+
+2024-08-17T13:17:59.482+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.482+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.488+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.489+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`orders` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@575dab37
+2024-08-17T13:17:59.489+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`orders` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.489+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.489+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@38b65eb9
+2024-08-17T13:17:59.489+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@3c32105c - Field level information: 
+	com.mysql.cj.result.Field@39a54d70[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=order_id,originalColumnName=order_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@39b5d60[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= MULTI_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@952883c[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=ticket_id,originalColumnName=ticket_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= MULTI_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@254ed9ba[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=order_date,originalColumnName=order_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@3693deae[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=total_amount,originalColumnName=total_amount,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@6f3af541[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=quantity,originalColumnName=quantity,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@723493f2[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=status,originalColumnName=status,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@21e40707[dbName=ktb_samsam,tableName=orders,originalTableName=orders,columnName=ticket_title,originalColumnName=ticket_title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+2024-08-17T13:17:59.490+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|---------|--------|----------|-----------|-------------|---------|-------|-------------|
+|order_id |user_id |ticket_id |order_date |total_amount |quantity |status |ticket_title |
+|---------|--------|----------|-----------|-------------|---------|-------|-------------|
+|---------|--------|----------|-----------|-------------|---------|-------|-------------|
+
+2024-08-17T13:17:59.490+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.490+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`ticket` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@3182b7a2
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`ticket` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@677f1963
+2024-08-17T13:17:59.491+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@6622f6b4 - Field level information: 
+	com.mysql.cj.result.Field@398e1a48[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=ticket_id,originalColumnName=ticket_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@1d95957c[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= MULTI_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@2be33ac[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@73d8f219[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=contents,originalColumnName=contents,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3a4dea70[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=place,originalColumnName=place,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@b42a630[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=price,originalColumnName=price,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@7892d7a7[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=start_date,originalColumnName=start_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@4ceeba96[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=end_date,originalColumnName=end_date,mysqlType=10(FIELD_TYPE_DATE),sqlType=91,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@19a5d711[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=delete_yn,originalColumnName=delete_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@7c89133[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=veiw_yn,originalColumnName=veiw_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@69894182[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@500a6c2f[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=update_date,originalColumnName=update_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@67a02460[dbName=ktb_samsam,tableName=ticket,originalTableName=ticket,columnName=view_yn,originalColumnName=view_yn,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+2024-08-17T13:17:59.492+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|ticket_id |user_id |title |contents |place |price |start_date |end_date |delete_yn |veiw_yn |regist_date |update_date |view_yn |
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+|----------|--------|------|---------|------|------|-----------|---------|----------|--------|------------|------------|--------|
+
+2024-08-17T13:17:59.492+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.492+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.493+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.493+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`user` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@704a0f9
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`user` where 1=0  {executed in 1 ms}
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@46ccf22
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@620978eb - Field level information: 
+	com.mysql.cj.result.Field@5599d304[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@7738b226[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=password,originalColumnName=password,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@15cf663c[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3c288a4e[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=phone,originalColumnName=phone,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@27b27f3c[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=role,originalColumnName=role,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@1529406e[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|--------|---------|-----|------|-----|------------|
+|user_id |password |name |phone |role |regist_date |
+|--------|---------|-----|------|-----|------------|
+|--------|---------|-----|------|-----|------------|
+
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.494+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.498+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 12. Connection opened. {executed in 20ms} 
+2024-08-17T13:17:59.498+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 12. Connection.new Connection returned 
+2024-08-17T13:17:59.498+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 12. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.499+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 12. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.new PreparedStatement returned 
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.prepareStatement(select * from `ktb_samsam`.`user` where 1=0) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@3bbb5b2
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. select * from `ktb_samsam`.`user` where 1=0  {executed in 0 ms}
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.new ResultSet returned 
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.executeQuery() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@37c47166
+2024-08-17T13:17:59.505+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@68317dc0 - Field level information: 
+	com.mysql.cj.result.Field@5ae93815[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=user_id,originalColumnName=user_id,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags= PRIMARY_KEY, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4a100df[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=password,originalColumnName=password,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@107a0e6c[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@7346bede[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=phone,originalColumnName=phone,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@607c0933[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=role,originalColumnName=role,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=255, charsetName=UTF-8]
+	com.mysql.cj.result.Field@6cd75a1b[dbName=ktb_samsam,tableName=user,originalTableName=user,columnName=regist_date,originalColumnName=regist_date,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-08-17T13:17:59.506+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 
+|--------|---------|-----|------|-----|------------|
+|user_id |password |name |phone |role |regist_date |
+|--------|---------|-----|------|-----|------------|
+|--------|---------|-----|------|-----|------------|
+
+2024-08-17T13:17:59.506+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. ResultSet.close() returned void
+2024-08-17T13:17:59.506+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. PreparedStatement.close() returned 
+2024-08-17T13:17:59.506+09:00  INFO 39979 --- [    Test worker] log4jdbc.log4j2                          : 11. Connection.clearWarnings() returned 
+2024-08-17T13:17:59.506+09:00  INFO 39979 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-17T13:17:59.550+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 13. Connection opened. {executed in 21ms} 
+2024-08-17T13:17:59.550+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 13. Connection.new Connection returned 
+2024-08-17T13:17:59.551+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 13. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.551+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 13. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.570+09:00  INFO 39979 --- [    Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name customPasswordAuthenticationManager
+2024-08-17T13:17:59.579+09:00  WARN 39979 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-17T13:17:59.605+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 14. Connection opened. {executed in 21ms} 
+2024-08-17T13:17:59.605+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 14. Connection.new Connection returned 
+2024-08-17T13:17:59.605+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 14. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.605+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 14. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.658+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 15. Connection opened. {executed in 20ms} 
+2024-08-17T13:17:59.658+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 15. Connection.new Connection returned 
+2024-08-17T13:17:59.658+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 15. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.658+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 15. Connection.getAutoCommit() returned true
+2024-08-17T13:17:59.681+09:00  INFO 39979 --- [    Test worker] c.s.t.travelcommerce.AdminServiceTest    : Started AdminServiceTest in 0.565 seconds (process running for 3.693)
+2024-08-17T13:17:59.712+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 16. Connection opened. {executed in 21ms} 
+2024-08-17T13:17:59.712+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 16. Connection.new Connection returned 
+2024-08-17T13:17:59.713+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 16. Connection.isReadOnly() returned false
+2024-08-17T13:17:59.713+09:00  INFO 39979 --- [onnection adder] log4jdbc.log4j2                          : 16. Connection.getAutoCommit() returned true
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.8</a> at 2024. 8. 17. 오후 1:17:59</p>
+</div>
+</div>
+</body>
+</html>

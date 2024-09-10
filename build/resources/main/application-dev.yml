@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: prd
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: ${BUCKET_NAME}

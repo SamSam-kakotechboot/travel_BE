@@ -1,0 +1,1 @@
+CREATE DATABASE ktb_samsam;
