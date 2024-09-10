@@ -4,7 +4,15 @@ FROM gradle:7.3.3-jdk17 AS build
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# Gradle Wrapper 관련 파일과 소스 코드 복사
+# Gradle Wrapper 관련 파일 복사 (필수적으로 포함될 파일들)
+COPY gradlew gradlew.bat ./
+COPY gradle/wrapper/ ./gradle/wrapper/
+COPY build.gradle settings.gradle ./
+
+# 의존성 미리 다운로드 (캐시 활용)
+RUN ./gradlew dependencies --no-daemon
+
+# 전체 소스 코드 복사
 COPY . .
 
 # Gradle Wrapper를 사용하여 애플리케이션 빌드 (테스트 제외)
