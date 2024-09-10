@@ -10,10 +10,20 @@ pipeline {
         PRIVATE_INSTANCE_SSH_KEY_ID = 'instance-ssh-key-id'
         BASTION_HOST_SSH_KEY_ID = 'instance-ssh-key-id'
     }
+    tools {
+        gradle 'gradle 8.1' // Jenkins에서 설정한 Gradle 8.1 사용
+    }
     stages {
         stage('Checkout Code') {
             steps {
                 checkout scm
+            }
+        }
+        stage('Build with Gradle') {   // Gradle 빌드 스테이지 추가
+            steps {
+                script {
+                    sh './gradlew clean build --no-daemon'
+                }
             }
         }
         stage('Build Docker Image') {
