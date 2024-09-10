@@ -4,26 +4,20 @@ pipeline {
         AWS_REGION = 'ap-northeast-2'
         ECR_REPO_NAME = 'ktb-samsam-be-ecr'
         IMAGE_TAG = "latest"
-        COMPOSE_FILE = 'docker-compose.yml'
+        AWS_ACCOUNT_ID = 'aws-account-id'
+        ECR_REPO_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO_NAME}"
 
-        // SSH Key IDs (Jenkins Credentials ID)
+        // 새로운 환경 변수
         PRIVATE_INSTANCE_SSH_KEY_ID = 'instance-ssh-key-id'
         BASTION_HOST_SSH_KEY_ID = 'instance-ssh-key-id'
-    }
-    tools {
-        gradle 'gradle 8.1' // Jenkins에서 설정한 Gradle 8.1 사용
+        PRIVATE_IP = 'private-ip'
+        PUBLIC_IP = 'public-ip'
+        COMPOSE_FILE = 'docker-compose.yml'
     }
     stages {
         stage('Checkout Code') {
             steps {
                 checkout scm
-            }
-        }
-        stage('Build with Gradle') {   // Gradle 빌드 스테이지 추가
-            steps {
-                script {
-                    sh './gradlew clean build --no-daemon'
-                }
             }
         }
         stage('Build Docker Image') {
@@ -53,20 +47,14 @@ pipeline {
         stage('Deploy on Private Instance with Docker Compose') {
             steps {
                 script {
-                    withCredentials([
-                        string(credentialsId: 'aws-account-id', variable: 'AWS_ACCOUNT_ID'),
-                        string(credentialsId: 'private-ip', variable: 'PRIVATE_IP'),
-                        string(credentialsId: 'public-ip', variable: 'PUBLIC_IP')
-                    ]) {
-                        sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
-                            sh """
-                            ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
-                            docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
-                            sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
-                            docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
-                            EOF
-                            """
-                        }
+                    sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
+                        sh """
+                        ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
+                        docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
+                        sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
+                        docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
+                        EOF
+                        """
                     }
                 }
             }
