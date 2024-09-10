@@ -27,6 +27,14 @@ FROM openjdk:17-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# AWS CLI 설치
+RUN apt-get update && \
+    apt-get install -y unzip curl && \
+    curl "https://d1uj6qtbmh3dt5.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    sudo ./aws/install && \
+    rm -rf awscliv2.zip aws
+
 # 빌드 단계에서 생성된 JAR 파일을 정확히 복사
 COPY --from=build /app/build/libs/travelcommerce-0.0.1-SNAPSHOT.jar app.jar
 
