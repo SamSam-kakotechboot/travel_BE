@@ -48,10 +48,11 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker-compose down || true
-                    docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
-                    docker rm -f spring-app || true  # 기존 컨테이너 강제로 삭제
-                    docker-compose up --force-recreate -d
+                     docker-compose down || true
+                     docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
+                     docker rm -f spring-app || true  # 기존 컨테이너 강제로 삭제
+                     sleep 5  # 잠시 대기하여 포트 해제
+                     docker-compose up --force-recreate -d
                     '''
                 }
             }
