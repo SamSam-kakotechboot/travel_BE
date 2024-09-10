@@ -23,21 +23,24 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    buildDockerImage()
+                    docker.build("${ECR_REPO_NAME}:${IMAGE_TAG}")
                 }
             }
         }
         stage('Login to AWS ECR') {
             steps {
                 script {
-                    loginToECR()
+                    withAWS(region: "${AWS_REGION}", credentials: 'aws-credentials-id') {
+                        sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URI}'
+                    }
                 }
             }
         }
         stage('Push to ECR') {
             steps {
                 script {
-                    pushToECR()
+                    sh "docker tag ${ECR_REPO_NAME}:${IMAGE_TAG} ${ECR_REPO_URI}:${IMAGE_TAG}"
+                    sh "docker push ${ECR_REPO_URI}:${IMAGE_TAG}"
                 }
             }
         }
@@ -45,28 +48,11 @@ pipeline {
             steps {
                 script {
                     deployWithDockerCompose()
+                    }
                 }
             }
         }
     }
-}
-
-@NonCPS
-def buildDockerImage() {
-    docker.build("${ECR_REPO_NAME}:${IMAGE_TAG}")
-}
-
-@NonCPS
-def loginToECR() {
-    withAWS(region: "${AWS_REGION}", credentials: 'aws-credentials-id') {
-        sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URI}'
-    }
-}
-
-@NonCPS
-def pushToECR() {
-    sh "docker tag ${ECR_REPO_NAME}:${IMAGE_TAG} ${ECR_REPO_URI}:${IMAGE_TAG}"
-    sh "docker push ${ECR_REPO_URI}:${IMAGE_TAG}"
 }
 
 @NonCPS
