@@ -23,41 +23,61 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${ECR_REPO_NAME}:${IMAGE_TAG}")
+                    buildDockerImage()
                 }
             }
         }
         stage('Login to AWS ECR') {
             steps {
                 script {
-                    withAWS(region: "${AWS_REGION}", credentials: 'aws-credentials-id') {
-                        sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URI}'
-                    }
+                    loginToECR()
                 }
             }
         }
         stage('Push to ECR') {
             steps {
                 script {
-                    sh "docker tag ${ECR_REPO_NAME}:${IMAGE_TAG} ${ECR_REPO_URI}:${IMAGE_TAG}"
-                    sh "docker push ${ECR_REPO_URI}:${IMAGE_TAG}"
+                    pushToECR()
                 }
             }
         }
         stage('Deploy on Private Instance with Docker Compose') {
             steps {
                 script {
-                    sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
-                        sh """
-                        ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
-                        docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
-                        sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
-                        docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
-                        EOF
-                        """
-                    }
+                    deployWithDockerCompose()
                 }
             }
         }
+    }
+}
+
+@NonCPS
+def buildDockerImage() {
+    docker.build("${ECR_REPO_NAME}:${IMAGE_TAG}")
+}
+
+@NonCPS
+def loginToECR() {
+    withAWS(region: "${AWS_REGION}", credentials: 'aws-credentials-id') {
+        sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URI}'
+    }
+}
+
+@NonCPS
+def pushToECR() {
+    sh "docker tag ${ECR_REPO_NAME}:${IMAGE_TAG} ${ECR_REPO_URI}:${IMAGE_TAG}"
+    sh "docker push ${ECR_REPO_URI}:${IMAGE_TAG}"
+}
+
+@NonCPS
+def deployWithDockerCompose() {
+    sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
+        sh """
+        ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
+        docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
+        sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
+        docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
+        EOF
+        """
     }
 }
