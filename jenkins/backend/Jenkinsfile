@@ -47,23 +47,17 @@ pipeline {
         stage('Deploy on Private Instance with Docker Compose') {
             steps {
                 script {
-                    deployWithDockerCompose()
+                    sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
+                        sh """
+                        ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
+                        docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
+                        sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
+                        docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
+                        EOF
+                        """
                     }
                 }
             }
         }
-    }
-}
-
-@NonCPS
-def deployWithDockerCompose() {
-    sshagent([BASTION_HOST_SSH_KEY_ID, PRIVATE_INSTANCE_SSH_KEY_ID]) {
-        sh """
-        ssh -v -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p ubuntu@${PUBLIC_IP}" ubuntu@${PRIVATE_IP} <<EOF
-        docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
-        sed -i 's|image: .*|image: ${ECR_REPO_URI}:${IMAGE_TAG}|' ${COMPOSE_FILE}
-        docker-compose -f ${COMPOSE_FILE} up -d --force-recreate
-        EOF
-        """
     }
 }
