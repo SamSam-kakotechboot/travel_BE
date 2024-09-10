@@ -48,9 +48,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker-compose down || true
+                    docker compose down || true
                     docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
-                    docker-compose up -d
+                    docker compose up -d
                     '''
                 }
             }
