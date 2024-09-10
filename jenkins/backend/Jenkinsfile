@@ -1,8 +1,6 @@
 pipeline {
     agent any
     environment {
-        GRADLE_HOME = '/opt/gradle/gradle-8.1'
-        PATH = "${GRADLE_HOME}/bin:${env.PATH}"
         AWS_REGION = 'ap-northeast-2'
         ECR_REPO_NAME = 'ktb-samsam-be-ecr'
         IMAGE_TAG = "latest"
