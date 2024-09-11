@@ -52,7 +52,7 @@ pipeline {
                     docker pull ${ECR_REPO_URI}:${IMAGE_TAG}
                     docker rm -f spring-app || true  # 기존 컨테이너 강제로 삭제
                     fuser -k 8090/tcp || true  # 8090 포트를 점유한 프로세스 강제로 종료
-                    docker network prune -f || true  # 네트워크 초기화함
+                    docker network prune -f || true  # 네트워크 초기화 함
                     sleep 5  # 잠시 대기하여 포트 해제
                     docker-compose up --force-recreate -d
                     '''
