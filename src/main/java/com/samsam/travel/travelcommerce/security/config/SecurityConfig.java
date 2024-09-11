@@ -23,6 +23,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * 이 클래스는 Spring Boot 애플리케이션에서 보안 설정을 구성하는 책임을 담당합니다.
  * 인증, 인가, CORS, JWT 기반 인증을 포함합니다.
@@ -64,7 +66,7 @@ public class SecurityConfig {
         http
                 .httpBasic(AbstractHttpConfigurer::disable) // HTTP Basic 인증 비활성화
                 .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화
-                .cors(cors -> cors.disable())  // CORS를 완전히 비활성화
+                .cors(withDefaults()) // CORS 활성화
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)) // Frame Options 비활성화
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT를 사용한 무상태 세션 정책
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests // 특정 경로에 대해 인증 및 인가 규칙을 설정
