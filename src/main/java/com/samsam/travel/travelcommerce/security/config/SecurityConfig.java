@@ -20,7 +20,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -96,7 +95,8 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(","))); // 환경 변수에서 읽어온 Origin URL을 패턴으로 설정
+//        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(","))); // 환경 변수에서 읽어온 Origin URL을 패턴으로 설정
+        configuration.setAllowedOriginPatterns(List.of("http://3.35.149.168")); // 직접 IP 주소 설정
         configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "TRACE")); // CORS를 허용할 HTTP Method
         configuration.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         configuration.setAllowCredentials(true); // 자격 증명 허용
