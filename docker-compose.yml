@@ -1,25 +1,45 @@
 version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    container_name: elasticsearch
     environment:
-      MYSQL_ROOT_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      MYSQL_DATABASE: ktb_samsam
+      - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
-      - "3306:3306"
+      - "9200:9200"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ../src/main/resources/migration:/docker-entrypoint-initdb.d/
+      - es_data:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.14.0
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.14.0
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
 
   spring-app:
-    build:
-      context: ../
-      dockerfile: Dockerfile
+    image: 160885265705.dkr.ecr.ap-northeast-2.amazonaws.com/ktb-samsam-be-ecr:latest
     container_name: spring-app
     ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "8090:8090"
+    volumes:
+      - ./logs:/app/logs
     environment:
       SPRING_PROFILES_ACTIVE: "${SPRING_PROFILES_ACTIVE}"
       SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL}"
@@ -27,11 +47,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: "${SPRING_DATASOURCE_PASSWORD}"
       SPRING_JPA_HIBERNATE_DDL_AUTO: "${SPRING_JPA_HIBERNATE_DDL_AUTO}"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}"
-    volumes:
-      - ./logs:/app/logs
     depends_on:
-      - mysql
+      - logstash
 
 volumes:
   es_data:
-  mysql_data:
