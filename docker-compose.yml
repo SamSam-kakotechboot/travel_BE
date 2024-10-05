@@ -34,7 +34,9 @@ services:
       - elasticsearch
 
   spring-app:
-    image: 160885265705.dkr.ecr.ap-northeast-2.amazonaws.com/ktb-samsam-be-ecr:latest
+    build:
+      context: ../
+      dockerfile: Dockerfile
     container_name: spring-app
     ports:
       - "8090:8090"
